@@ -5,6 +5,7 @@
 ;; Author: R.W. van 't Veer
 ;; Created: 20 Feb 2009
 ;; Keywords: tools processes
+;; Package-Version: 20160408.2023
 ;; Version: 0.4.0
 ;; URL: https://github.com/remvee/android-mode
 
@@ -165,7 +166,11 @@ root directory can be found."
      (if android-root-dir
        (let ((default-directory android-root-dir))
          ,body)
-       (error "can't find project root"))))
+       (if (> (length (getenv "ANDROID_BUILD_TOP")) 0)
+           (let ((default-directory (getenv "ANDROID_BUILD_TOP")))
+             ,body)
+           (error "can't find project root"))
+        )))
 
 (defun android-local-sdk-dir ()
   "Try to find android sdk directory through the local.properties
@@ -183,7 +188,6 @@ environment value otherwise the `android-mode-sdk-dir' variable."
              (and (re-search-forward "^sdk\.dir=\\(.*\\)" nil t)
                   (let ((sdk-dir (match-string 1)))
                     (and (file-exists-p sdk-dir) sdk-dir)))))))
-   (getenv "ANDROID_HOME")
    android-mode-sdk-dir
    (error "no SDK directory found")))
 

@@ -1,0 +1,12 @@
+
+ANDROID_BUILD_PATHS=/home/xiaomi/src/out/host/linux-x86/bin:/home/xiaomi/src/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:/home/xiaomi/src/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:/home/xiaomi/src/development/scripts:/home/xiaomi/src/prebuilts/devtools/tools:/home/xiaomi/src/external/selinux/prebuilts/bin:/home/xiaomi/src/prebuilts/android-emulator/linux-x86_64:
+
+ANDROID_BUILD_TOP=/home/xiaomi/src
+
+ANDROID_DEV_SCRIPTS=/home/xiaomi/src/development/scripts:/home/xiaomi/src/prebuilts/devtools/tools:/home/xiaomi/src/external/selinux/prebuilts/bin
+
+ANDROID_EMULATOR_PREBUILTS=/home/xiaomi/src/prebuilts/android-emulator/linux-x86_64
+
+ANDROID_HOST_OUT=/home/xiaomi/src/out/host/linux-x86
+
+ANDROID_PRODUCT_OUT=/home/xiaomi/src/out/target/product/nationaltreasure
