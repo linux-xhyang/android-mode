@@ -198,8 +198,7 @@ environment value otherwise the `android-mode-sdk-dir' variable."
                          (mapcar (lambda (path)
                                    (mapcar (lambda (ext)
                                              (mapconcat 'identity
-                                                        `(,(android-local-sdk-dir)
-                                                          ,path ,(concat name ext))
+                                                        `(,path ,(concat name ext))
                                                         "/"))
                                            android-mode-sdk-tool-extensions))
                                  android-mode-sdk-tool-subdirs)))
