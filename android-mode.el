@@ -229,6 +229,26 @@ environment value otherwise the `android-mode-sdk-dir' variable."
         (error output)
       (find-file expanded-path))))
 
+(setq android-mode-rootdir
+      (file-name-directory (or load-file-name (buffer-file-name))))
+
+(defun android-create-gradle-project (path package activity)
+  "Create new Android project with SDK app."
+  (interactive "FPath: \nMPackage: \nMActivity: ")
+  (let* ((target (completing-read "Target: " (android-list-targets)))
+         (expanded-path (expand-file-name path))
+         (command (format "%s create project --gradle --gradle-version 2.3.0 --path %S --package %s --activity %s --target %S"
+                          (android-tool-path "android")
+                          expanded-path package activity target))
+         (output (shell-command-to-string command)))
+    (if (string-equal "Error" (substring output 0 5))
+        (error output)
+      (let ((template (concat android-mode-rootdir "/template/")))
+        (copy-file (concat template "wrapper/gradle-wrapper.properties")
+                   (concat expanded-path "/gradle/wrapper/gradle-wrapper.properties") :OK-IF-ALREADY-EXISTS 1)
+        (find-file expanded-path))
+      )))
+
 (defun android-list-targets ()
   "List Android SDKs installed on local machine."
   (let* ((command (concat (android-tool-path "android") " list target"))
